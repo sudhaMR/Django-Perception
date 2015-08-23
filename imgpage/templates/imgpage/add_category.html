@@ -120,7 +120,24 @@
                 {{ field.help_text }}
                 {{ field }}
             {% endfor %}
-            <input type="submit" name="submit" value="Go!" />
+            <script type="text/javascript">
+            	function updateid()
+            	{
+            		document.getElementById("id").value = "1";
+            	}
+            </script>
+
+            <script type="text/javascript">
+            	function updatepath()
+            	{
+            		document.getElementById("filepath").value = "images/owl.jpg";
+            	}
+            </script>
+            <input type="text" name="tags"/ onchange="updateid()">
+            <input type="hidden" id="id" name="id" value =1 />
+            <input type="hidden" id="filepath" name="filepath" value ="path"/>
+            <input type="submit" name="submit" value="Go!" onchange="updatepath()" />
+
         </form>
 
         <a href="/imgpage/about/">About</a><br />

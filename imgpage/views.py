@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from imgpage.forms import ImgForm
+from django.db import models
+from imgpage.models import ImgObject,UserObject
 
 def index(request):
 
@@ -22,8 +24,12 @@ def about(request):
 def add_category(request):
     # A HTTP POST?
     if request.method == 'POST':
-        #form = ImgForm()
         form = ImgForm(request.POST)
+        img_tags = request.POST.get('tags','')
+        img_id = request.POST.get('id','')
+        img_path = request.POST.get('filepath','')
+        saving_tag = ImgObject(img_file = img_path,img_id=img_id, img_tags = img_tags)
+        saving_tag.save()
 
         # Have we been provided with a valid form?
         if form.is_valid():

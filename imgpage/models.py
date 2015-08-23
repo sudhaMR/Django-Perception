@@ -1,7 +1,7 @@
 from django.db import models
 
 class ImgObject(models.Model):
-    img_file = models.CharField(max_length=128,unique=True)
+    img_file = models.CharField(max_length=128,unique=False)
     img_id = models.IntegerField(default=0)
     img_tags = models.CharField(max_length=320,unique=False)
 
