@@ -53,10 +53,6 @@
 
     </style>
 
-    <script type="text/javascript">
-        DJANGO_STATIC_URL = "{% static ""%}";
-    </script>
-
 
         <title>Image Page</title>
         <link rel="stylesheet" href="{% static "css/base.css" %}" />
@@ -69,55 +65,11 @@
        
       <!-- <a href="/imgpage/add_category/">Add a New Category</a><br />-->
 
-       <section >            
+       <section>            
             <div id="mainimage" class="photo">
-            
-            <img src="{% static "images/image0.jpg"%}" alt="Picture "/>   
+            <img src="{% static "images/owl.jpg" %}" alt="Picture "/>    
+
             </div>
-
-            <script  type="text/javascript">
-            (
-            function()
-            {
-
-            var images = [], x = -1;    
-            var img1 = document.getElementById('mainimage');
-            var img = img1.getElementsByTagName("img")[0];            
-            console.log("Print path:"+img.src);
-            console.log("static url:"+DJANGO_STATIC_URL);
-            for(i=0;i<2;i++)
-            {
-                images[i] = DJANGO_STATIC_URL+"images/image"+i+".jpg";
-                 console.log("Loop "+i)
-            }
-
-            function displayNextImage() 
-            {
-                  x = (x === images.length - 1) ? 0 : x + 1;
-                  console.log("NextImg "+x);
-                document.getElementsByTagName("img")[0].src =  images[x];
-
-            }
-
-            function displayPreviousImage() 
-            {
-                  x = (x <= 0) ? images.length - 1 : x - 1;
-                   console.log("PrevImg "+x);
-                document.getElementsByTagName("img")[0].src = images[x];
-            }
-
-            //function startTimer() 
-           // img.onload = function() 
-            //{
-                  setInterval(displayNextImage, 3000);
-                   console.log("Interval ");
-            //}
-
-            
-            }());
-            </script>
-
-            
             
             <script type="text/javascript">
             (
@@ -125,7 +77,9 @@
             {
             var img1 = document.getElementById('mainimage');
             var img = img1.getElementsByTagName("img")[0];
-           
+                console.log("Printing path:"+img.src);
+            document.getElementsByTagName("img")[0].src = "{% static "images/image1.jpg"%}";
+             console.log("Printing path2:"+img.src);
             img.onload = function() 
                 {
                 console.log("Image height"+img.height);

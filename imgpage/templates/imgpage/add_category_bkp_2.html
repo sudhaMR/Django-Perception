@@ -53,10 +53,6 @@
 
     </style>
 
-    <script type="text/javascript">
-        DJANGO_STATIC_URL = "{% static ""%}";
-    </script>
-
 
         <title>Image Page</title>
         <link rel="stylesheet" href="{% static "css/base.css" %}" />
@@ -82,12 +78,13 @@
 
             var images = [], x = -1;    
             var img1 = document.getElementById('mainimage');
-            var img = img1.getElementsByTagName("img")[0];            
+            var img = img1.getElementsByTagName("img")[0];
+            DJANGO_STATIC_URL = '{{ STATIC_URL }}';
             console.log("Print path:"+img.src);
             console.log("static url:"+DJANGO_STATIC_URL);
             for(i=0;i<2;i++)
             {
-                images[i] = DJANGO_STATIC_URL+"images/image"+i+".jpg";
+                images[i] = "images/image"+i+".jpg";
                  console.log("Loop "+i)
             }
 
@@ -95,8 +92,7 @@
             {
                   x = (x === images.length - 1) ? 0 : x + 1;
                   console.log("NextImg "+x);
-                document.getElementsByTagName("img")[0].src =  images[x];
-
+                document.getElementsByTagName("img")[0].src = images[x];
             }
 
             function displayPreviousImage() 

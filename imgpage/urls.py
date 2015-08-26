@@ -15,10 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url,patterns
 from imgpage import views
+from perception.settings import STATIC_PATH, DEBUG
 
 urlpatterns = patterns('',
     url(r'^$',views.index,name='index'),
     url(r'^about/',views.about,name='about'),
     url(r'^index/',views.index,name='index'),
     #url(r'^index/',views.index,name='add_category'))
+    url(r'^static/(.*)$', 'django.views.static.serve', {'document_root': STATIC_PATH, 'show_indexes': True}),
+    url(r'^static/', 'django.views.static.serve', {'document_root': STATIC_PATH, 'show_indexes': True}),
     url(r'^add_category/$', views.add_category, name='add_category'))

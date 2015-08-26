@@ -22,7 +22,7 @@ TEMPLATE_PATH= os.path.join(BASE_DIR,'/templates')
 
 STATIC_PATH = os.path.join(BASE_DIR,'static')
 STATIC_URL = '/static/'
-print(STATIC_PATH)
+#print(STATIC_PATH)
 STATICFILES_DIRS = (
         STATIC_PATH,
         BASE_DIR,
@@ -40,7 +40,6 @@ TEMPLATE_DIRS = [
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
-
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '+adx3apzd)5t(nb+q(351hig1uz)7=r0ap+**4+486(pq21)k#'
@@ -91,10 +90,6 @@ TEMPLATES = [
         },
     },
 ]
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-'django.core.context_processors.static',
-)
 
 WSGI_APPLICATION = 'perception.wsgi.application'
 
