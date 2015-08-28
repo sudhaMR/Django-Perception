@@ -18,7 +18,7 @@
 
     #mainimage{
         width: 640px;
-        height: 480px;    
+        height: 400px;    
         display: block;
         margin: auto;   
     }
@@ -32,7 +32,7 @@
 
     section{
         width: 640px;
-        height: 480px;
+        height: 400px;
         margin-left: auto;
         margin-right: auto;        
         border: 3px;
@@ -47,7 +47,7 @@
 
     header{
         background-color: #2F4F4F;
-        padding: 0;
+        float:top;
     }
 
 
@@ -57,6 +57,70 @@
         DJANGO_STATIC_URL = "{% static ""%}";
     </script>
 
+<script language="JavaScript" type="text/javascript">
+var sec = 00;   // set the seconds
+var min = 01;   // set the minutes
+
+function countDown() {
+   sec--;
+  if (sec == -01) {
+   sec = 01;
+   min = min - 1; }
+  else {
+   min = min; }
+
+if (sec<=9) { sec = "0" + sec; }
+
+  time = (min<=9 ? "0" + min : min) + " min " + sec + " sec ";
+
+if (document.getElementById) { document.getElementById('theTime').innerHTML = time; }
+
+SD=window.setTimeout("countDown();", 1000);
+if (min == '00' && sec == '00') { sec = "00"; window.clearTimeout(SD); 
+sec = 11;   // set the seconds
+min = 00;   // set the minutes
+console.log("sec ="+sec+" min="+min);}
+}
+window.onload = countDown;
+console.log("sec ="+sec+" min="+min);
+</script>
+
+<style type="text/css">
+
+ .timeClass {
+  font-family:arial,verdana,helvetica,sans-serif;
+  font-weight:normal;
+  font-size:16pt;
+  font-style: bold;
+  }
+
+  .submitbox{
+    width: 40px;
+    height: 40px;
+    font-style: 16pt;
+  }
+
+  .inputbox{
+    width: 600px;
+    height: 30px;
+  }
+
+  #timebox {
+    position: absolute;
+    height: 100px;
+    width: 400px;
+    background-color: #ffffff;
+    
+    left: 1100px;
+    top:400px;
+    text-align: right;
+  }
+
+  #titlebox{
+    float:top;
+  }
+
+</style>
 
         <title>Image Page</title>
         <link rel="stylesheet" href="{% static "css/base.css" %}" />
@@ -65,12 +129,22 @@
     </head>
 
     <body>
-       <header> <h1><i>Perception</i></h1></header>
-       
-      <!-- <a href="/imgpage/add_category/">Add a New Category</a><br />-->
 
+        <div id="timebox">
+            <table width="40%">
+                 <tr><td width="40%" align="center"><span id="theTime" class="timeClass"></span></td></tr> 
+            </table>
+        </div>
+
+
+        <div id="txt"></div>
+
+        <div id="titlebox" align="right">
+            <header> <h1><i>Perception</i></h1></header>
+        </div>
+     
        <section >            
-            <div id="mainimage" class="photo">
+            <div id="mainimage" class="photo" >
             
             <img src="{% static "images/image0.jpg"%}" alt="Picture "/>   
             </div>
@@ -83,19 +157,20 @@
             var images = [], x = -1;    
             var img1 = document.getElementById('mainimage');
             var img = img1.getElementsByTagName("img")[0];            
-            console.log("Print path:"+img.src);
-            console.log("static url:"+DJANGO_STATIC_URL);
+            //console.log("Print path:"+img.src);
+            //console.log("static url:"+DJANGO_STATIC_URL);
             for(i=0;i<2;i++)
             {
                 images[i] = DJANGO_STATIC_URL+"images/image"+i+".jpg";
-                 console.log("Loop "+i)
+              //   console.log("Loop "+i)
             }
 
             function displayNextImage() 
             {
+                countDown();
                   x = (x === images.length - 1) ? 0 : x + 1;
-                  console.log("NextImg "+x);
                 document.getElementsByTagName("img")[0].src =  images[x];
+                
 
             }
 
@@ -106,13 +181,8 @@
                 document.getElementsByTagName("img")[0].src = images[x];
             }
 
-            //function startTimer() 
-           // img.onload = function() 
-            //{
-                  setInterval(displayNextImage, 3000);
+                  setInterval(displayNextImage, 10000);
                    console.log("Interval ");
-            //}
-
             
             }());
             </script>
@@ -128,7 +198,6 @@
            
             img.onload = function() 
                 {
-                console.log("Image height"+img.height);
                 if(img.height > img.width) 
                     {
                     img.style.height = '100%' ;
@@ -141,8 +210,6 @@
                     }
 
                     //img.style.text-align='center';
-                    console.log("Image height"+img.height);
-                    console.log("Image width"+img.width);
                 };
 
             }());
@@ -179,13 +246,14 @@
             <script type="text/javascript">
             	function updatepath()
             	{
-            		document.getElementById("filepath").value = "images/owl.jpg";
+            	document.getElementById("filepath").value = document.getElementsByTagName("img")[0].src ;
+                console.log("File path:"+document.getElementById("filepath").value);
             	}
             </script>
-            <input type="text" name="tags"/ onchange="updateid()">
-            <input type="hidden" id="id" name="id" value =1 />
-            <input type="hidden" id="filepath" name="filepath" value ="path"/>
-            <input type="submit" name="submit" value="Go!" onchange="updatepath()" />
+            Enter strings here :<input type="text" class="inputbox" name="tags"/ onfocus ="updateid()">
+            <input type="hidden" id="id" name="id" />
+            <input type="hidden" id="filepath" name="filepath" value="updatepath()" />
+            <input type="submit" name="submit" class="submitbox" value="Go!" onclick="updatepath()" />
 
         </form>
 
