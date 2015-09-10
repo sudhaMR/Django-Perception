@@ -159,10 +159,11 @@ console.log("sec ="+sec+" min="+min);
             var img = img1.getElementsByTagName("img")[0];            
             //console.log("Print path:"+img.src);
             //console.log("static url:"+DJANGO_STATIC_URL);
-            for(i=0;i<2;i++)
+            for(i=0;i<4;i++)
             {
                 images[i] = DJANGO_STATIC_URL+"images/image"+i+".jpg";
-              //   console.log("Loop "+i)
+                //images[i] = DJANGO_STATIC_URL+"images/"+"*.jpg";
+                console.log("image[i]"+images[i]);
             }
 
             function displayNextImage() 
@@ -203,6 +204,12 @@ console.log("sec ="+sec+" min="+min);
                     img.style.height = '100%' ;
                     img.style.width = 'auto';
                     }
+                else if(img.height == img.width)
+                    {
+                     img.style.height = '100%';
+                     img.style.width = '100%';
+                    }   
+
                 else
                     {
                         img.style.height = 'auto';

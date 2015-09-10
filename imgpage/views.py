@@ -3,6 +3,29 @@ from django.http import HttpResponse
 from imgpage.forms import ImgForm
 from django.db import models
 from imgpage.models import ImgObject,UserObject
+import os
+from perception.wsgi import file_dict,swap_dict
+
+'''directory = 'C:\Users\MRSUDHA\Documents\GitHub\Django-Perception\static\images'
+ext = '.jpg'
+file_dict = {}
+img_file_title = [i for i in os.listdir(directory) if os.path.splitext(i)[1] == ext]
+c = 0
+
+for i in os.listdir(directory):
+    if(os.path.splitext(i)[1] == ext):
+	    c=c+1
+	    file_dict[i] = ["image"+ str(c)]
+	    print i,c
+		
+#for f in img_file_title:
+ #   file_dict[f]= "image"+str(c)
+  #  c = c+1
+
+for i in file_dict:
+    print i,file_dict[i]
+
+'''
 
 def index(request):
 
@@ -21,6 +44,16 @@ def about(request):
     return HttpResponse("About page<a href='/imgpage/add_category.html'>Index</a>")
 
 
+def request_title(path): #Path = C:/xyz/abc/a1.jpg
+    s1,s2 = os.path.splitdrive(path)  #s1 = C: s2=/xyz/abc/a1.jpg
+    s2,s3 = os.path.split(s2) #s3 = a1.jpg
+    print "s3 "+s3
+    for i in  swap_dict:
+        print "i="+i
+        print "swap "+swap_dict[i]
+        if i == s3:
+            return str(swap_dict[i])
+
 def add_category(request):
     # A HTTP POST?
     if request.method == 'POST':
@@ -28,7 +61,8 @@ def add_category(request):
         img_tags = request.POST.get('tags','')
         img_id = request.POST.get('id','')
         img_path = request.POST.get('filepath','')
-        saving_tag = ImgObject(img_file = img_path,img_id=img_id, img_tags = img_tags)
+        img_title = request_title(img_path)
+        saving_tag = ImgObject(img_file = img_path,img_id=img_id, img_tags = img_tags,img_title = img_title)
         saving_tag.save()
 
         # Have we been provided with a valid form?
