@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+	<head>
+		<h2>Tag stats</h2>
+		<style type="text/css">
+			th{
+				color:black;
+    			font-family: "Courier New", Courier, monospace;
+    			text-align: center;
+   				font-size: 20;
+   				font-style: bold;
+			  }
+			 td{
+				color:black;
+    			font-family: "Lucida Console", Courier, monospace;
+    			text-align: center;
+   				font-size: 20;
+			  }
+			table#t01 tr:nth-child(even) 
+			  {
+   				 background-color: #eee;
+			  }
+			table#t01 tr:nth-child(odd) 
+			{
+    			background-color: #fff;
+			}
+			table#t01 th 
+			{
+    			color: white;
+   				background-color: black;
+			}
+		</style>
+	</head>
+	<body>
+		<table style="width:100%" id="t01">
+    		<tr>
+        		<th>User Tags</th>
+        		<th>Image Title</th>
+    		</tr>
+    		{% csrf_token %}
+        	
+    		{% for item in a %}
+    		<tr>     	    			
+        		<td>{{ item.img_tags }}</td>
+        		<td>{{ item.img_title}}</td>
+    		</tr>
+    		{% endfor %}
+		</table>
+		<a href="imgpage/add_category/" name="add_category">Home</a>
+	</body>
+</html> 

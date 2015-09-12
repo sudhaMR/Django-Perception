@@ -7,7 +7,9 @@ class ImgObject(models.Model):
     img_title = models.CharField(max_length=128,unique=False)
     
     def __unicode__(self):
-        return self.img_file
+        #return self.img_title
+        return self.img_title+" "+self.img_tags
+   
 
 class UserObject(models.Model):
     user_id = models.IntegerField(default=0)

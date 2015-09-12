@@ -5,6 +5,7 @@ from django.db import models
 from imgpage.models import ImgObject,UserObject
 import os
 from perception.wsgi import file_dict,swap_dict
+from django.template import RequestContext, loader
 
 '''directory = 'C:\Users\MRSUDHA\Documents\GitHub\Django-Perception\static\images'
 ext = '.jpg'
@@ -53,6 +54,18 @@ def request_title(path): #Path = C:/xyz/abc/a1.jpg
         print "swap "+swap_dict[i]
         if i == s3:
             return str(swap_dict[i])
+
+def taginfo(request):
+    query_results = ImgObject.objects.all()
+    j=0
+    a=[]
+    for i in query_results:
+        a.append(i)
+    print a
+    context = {'a': a}
+    return render(request, 'imgpage/taginfo.html', context)
+    #return HttpResponse("Taginfo <a href='/imgpage/add_category/'>Add tag</a>")
+
 
 def add_category(request):
     # A HTTP POST?

@@ -169,7 +169,9 @@ console.log("sec ="+sec+" min="+min);
             function displayNextImage() 
             {
                 countDown();
-                  x = (x === images.length - 1) ? 0 : x + 1;
+                  x = (x === images.length -1) ? 0 : x + 1;
+                  console.log("X="+x);
+                  console.log("imgx="+images[x])
                 document.getElementsByTagName("img")[0].src =  images[x];
                 
 
@@ -229,9 +231,6 @@ console.log("sec ="+sec+" min="+min);
           
         </section>
 
-
-
-
         <h3>What does the picture remind you of?</h3>
 
         <form id="category_form" method="post" action="/imgpage/add_category/">
@@ -264,7 +263,8 @@ console.log("sec ="+sec+" min="+min);
 
         </form>
 
-        <a href="/imgpage/about/">About</a><br />
+    <!--    <a href="/imgpage/about/">About</a><br />-->
+        <a href="/imgpage/taginfo/" name="taginfo">View stats</a>
     </body>
 
 </html>
