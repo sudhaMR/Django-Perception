@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+    <head>
+    <style>
+    h1{
+    color:white;
+    font-family: "Courier New", Courier, monospace;
+    text-align: center;
+    }
+    h3{
+    color:black;
+    font-family: "Courier New", Courier, monospace;
+    text-align: center;
+    font-size: 20;
+    }
+
+    #mainimage{
+        width: 600px;
+        height: 300px;    
+        display: block;
+        margin: auto;   
+    }
+
+    #mainimage img{
+            width: 100%;   
+            margin: auto;           
+            border-style: outset;
+            border-color: Black; 
+    }
+
+    section{
+        width: 640px;
+        height: 420px;
+        margin-left: auto;
+        margin-right: auto;        
+        border: 3px;
+        border-style: outset;
+        border-color: LimeGreen;   
+        padding: 2% ;   
+    }
+
+    form{
+        text-align: center;
+    }
+
+    header{
+        background-color: #2F4F4F;
+        float:top;
+    }
+
+
+    </style>
+
+    <script type="text/javascript">
+        DJANGO_STATIC_URL = "{% static ""%}";
+    </script>
+
+    <script type="text/javascript">
+    	var images = [] ;
+    	x = -1;
+    </script>
+<!--
+{% csrf_token %}
+        {% for item in imageArray %}  
+        <p>{{item}} </p>
+        <script type="text/javascript">
+         	var i=0;
+
+         	images[x] = item;
+         	console.log("images[x]="+images[x]);
+         	console.log("item="+item);
+         	x = x+1;
+        </script>     
+{% endfor %}
+
+-->
+<script type="text/javascript">
+	var images = "{{ imageArray|safe }}";
+</script>
+
+
+
+<script language="JavaScript" type="text/javascript">
+var sec = 00;   // set the seconds
+var min = 01;   // set the minutes
+
+function countDown() {
+   sec--;
+  if (sec == -01) {
+   sec = 01;
+   min = min - 1; }
+  else {
+   min = min; }
+
+if (sec<=9) { sec = "0" + sec; }
+
+  time = (min<=9 ? "0" + min : min) + " min " + sec + " sec ";
+
+if (document.getElementById) { document.getElementById('theTime').innerHTML = time; }
+
+SD=window.setTimeout("countDown();", 1000);
+if (min == '00' && sec == '00') { sec = "00"; window.clearTimeout(SD); 
+sec = 11;   // set the seconds
+min = 00;   // set the minutes
+console.log("sec ="+sec+" min="+min);}
+}
+window.onload = countDown;
+console.log("sec ="+sec+" min="+min);
+</script>
+
+<style type="text/css">
+
+ .timeClass {
+  font-family:arial,verdana,helvetica,sans-serif;
+  font-weight:normal;
+  font-size:16pt;
+  font-style: bold;
+  }
+
+  .submitbox{
+    width: 40px;
+    height: 40px;
+    font-style: 16pt;
+  }
+
+  .inputbox{
+    width: 600px;
+    height: 30px;
+  }
+
+  #timebox {
+    position: absolute;
+    height: 100px;
+    width: 400px;
+    background-color: #ffffff;
+    
+    left: 1100px;
+    top:400px;
+    text-align: right;
+  }
+
+  #titlebox{
+    float:top;
+  }
+
+  #taginfo{
+    text-align: center;
+    margin: auto;
+    display: block;
+  }
+
+</style>
+
+        <title>Image Page</title>
+        <link rel="stylesheet" href="{% static "css/base.css" %}" />
+        <script src="{% static "js/jquery.js" %}"></script> 
+
+    </head>
+
+    <body>
+
+        <div id="timebox">
+            <table width="40%">
+                 <tr><td width="40%" align="center"><span id="theTime" class="timeClass"></span></td></tr 
+            </table>
+        </div>
+ 
+   <!--     {% for img in imageArray%}
+    		<li>{{ imageArray }}</li>
+    		<li>{{ img }}</li>
+    		<p>img</p>
+		{% endfor %} -->
+
+        <div id="txt"></div>
+
+        <div id="titlebox" align="right">
+            <header> <h1><i>Perception</i></h1></header>
+        </div>
+     
+       <section >            
+            <div id="mainimage" class="photo" >
+            	<img src="{% static "images/image0.jpg"%}" alt="Picture "/>;
+            </div>
+        	<style type="text/css">
+            	div.photo { height: 100px; line-height: 100px;text-align:center; }
+            	div.photo img { vertical-align:middle; }
+            </style>
+          
+        </section>
+
+            <script  type="text/javascript" id="mainimage">
+      		var images = {{imageArray|safe}};
+      		console.log(images);
+      		console.log("imgx="+images[1]);   
+      		function slideshow()
+      		{
+      			var index = Math.floor((Math.random() * (images.length-1) + 1));
+      			console.log("index"+index);
+      			document.getElementsByTagName("img")[0].src =  DJANGO_STATIC_URL+"images/"+images[index];
+      			setTimeout("slideshow()",2500);
+      		}
+      		
+      		slideshow();
+			</script>
+                                   
+            <script type="text/javascript">
+            (
+            function() 
+            {
+            var img1 = document.getElementById('mainimage');
+            var img = img1.getElementsByTagName("img")[0];
+           
+            img.onload = function() 
+                {
+                if(img.height > img.width) 
+                    {
+                    img.style.height = '100%' ;
+                    img.style.width = 'auto';
+                    }
+                else if(img.height == img.width)
+                    {
+                     img.style.height = '100%';
+                     img.style.width = '100%';
+                    }   
+
+                else
+                    {
+                        img.style.height = 'auto';
+                        img.style.width = '100%';
+                    }
+
+                    //img.style.text-align='center';
+                };
+
+            }());
+            </script>
+           
+
+            
+
+        <h3>What does the picture remind you of?</h3>
+
+        <form id="category_form" method="post" action="/imgpage/add_category/">
+
+            {% csrf_token %}
+        
+            {% for field in form.visible_fields %}
+                {{ field.errors }}
+                {{ field.help_text }}
+                {{ field }}
+            {% endfor %}
+            <script type="text/javascript">
+            	function updateid()
+            	{
+            		document.getElementById("id").value = "1";
+            	}
+            </script>
+
+            <script type="text/javascript">
+            	function updatepath()
+            	{
+            	document.getElementById("filepath").value = document.getElementsByTagName("img")[0].src ;
+                console.log("File path:"+document.getElementById("filepath").value);
+            	}
+            </script>
+            Enter strings here :<input type="text" class="inputbox" name="tags"/ onfocus ="updateid()">
+            <input type="hidden" id="id" name="id" />
+            <input type="hidden" id="filepath" name="filepath" value="updatepath()" />
+            <input type="submit" name="submit" class="submitbox" value="Go!" onclick="updatepath()" />
+
+        </form>
+
+        <br>
+        <br>
+        <div style="text-align: center">
+            <a href="/imgpage/taginfo/" name="taginfo" id="taginfo" align="middle">View stats</a>
+        </div>
+    </body>
+
+</html>

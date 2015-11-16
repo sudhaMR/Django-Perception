@@ -20,4 +20,3 @@ class UserObject(models.Model):
         return self.user_id
     
     
-# Create your models here.

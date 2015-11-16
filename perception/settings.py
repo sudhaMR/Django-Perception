@@ -15,25 +15,23 @@ import os
 from os.path import join
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-print(BASE_DIR)
 
 TEMPLATE_PATH= os.path.join(BASE_DIR,'/templates')
 #print(TEMPLATE_PATH)
 
 STATIC_PATH = os.path.join(BASE_DIR,'static')
 STATIC_URL = '/static/'
-print(STATIC_PATH)
 STATICFILES_DIRS = (
         STATIC_PATH,
         BASE_DIR,
-        'C:/Users/MRSUDHA/Documents/Django/perception/static',
+        #'C:/Users/MRSUDHA/Documents/Django/perception/static',
 )
 
 TEMPLATE_DIRS = [
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    'C:/Users/MRSUDHA/Documents/Django/perception/templates/',
+    #'C:/Users/MRSUDHA/Documents/Django/perception/templates/',
     TEMPLATE_PATH,
     #BASE_DIR,
 ]
